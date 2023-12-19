@@ -1,4 +1,4 @@
-package com.car.rent_car;
+package com.car.rent_car.enums;
 
 public enum PricingScenario {
     NORMAL,
