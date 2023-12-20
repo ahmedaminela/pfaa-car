@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class VoitureService implements IVoitureService {
 
-  /*  @Autowired
+   @Autowired
     private VoitureRepository voitureRepository;
 
     public List<Voiture> getAllVoitures() {
@@ -31,5 +31,5 @@ public class VoitureService implements IVoitureService {
         voitureRepository.deleteById(id);
     }
 
-    // Other business logic methods can be added here*/
+
 }

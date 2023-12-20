@@ -1,8 +1,7 @@
 package com.car.rent_car.models;
 
-import com.car.rent_car.PricingScenario;
+import com.car.rent_car.enums.PricingScenario;
 import lombok.*;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import jakarta.persistence.*;
 import java.math.BigDecimal;
