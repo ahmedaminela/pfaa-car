@@ -1,4 +1,6 @@
 package com.car.rent_car.models;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 import lombok.*;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -24,6 +26,7 @@ public class Voiture {
     private Boolean dispo;
     private String carburant;
     private Double km;
+    @JsonFormat(pattern="yyyy-MM-dd", timezone="GMT+1")
     private Date date_sortie;
     private int puissance;
 

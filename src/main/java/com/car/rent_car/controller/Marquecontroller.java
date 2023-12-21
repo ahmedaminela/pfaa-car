@@ -1,7 +1,10 @@
 package com.car.rent_car.controller;
 
 import com.car.rent_car.models.Marque;
+import com.car.rent_car.requests.MarqueRequest;
 import com.car.rent_car.services.MarqueService;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.BeanClassLoaderAware;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,8 +42,10 @@ public class Marquecontroller {
 
     // Endpoint to create a new marque
     @PostMapping
-    public ResponseEntity<Marque> createMarque(@RequestBody Marque marque) {
-        Marque createdMarque = marqueService.saveMarque(marque);
+    public ResponseEntity<Marque> createMarque(@RequestBody MarqueRequest marqueRequest) {
+        Marque newMarque = new Marque();
+        BeanUtils.copyProperties(marqueRequest,newMarque);
+        Marque createdMarque = marqueService.saveMarque(newMarque);
         return new ResponseEntity<>(createdMarque, HttpStatus.CREATED);
     }
 

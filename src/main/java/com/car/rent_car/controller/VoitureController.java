@@ -2,7 +2,9 @@ package com.car.rent_car.controller;
 
 
 import com.car.rent_car.models.Voiture;
+import com.car.rent_car.requests.VoitureRequest;
 import com.car.rent_car.services.VoitureService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,8 +41,10 @@ public class VoitureController {
 
     // Endpoint to create a new voiture
     @PostMapping
-    public ResponseEntity<Voiture> createVoiture(@RequestBody Voiture voiture) {
-        Voiture createdVoiture = voitureService.saveVoiture(voiture);
+    public ResponseEntity<Voiture> createVoiture(@RequestBody VoitureRequest voitureRequest) {
+        Voiture newVoiture = new Voiture();
+        BeanUtils.copyProperties(voitureRequest,newVoiture);
+        Voiture createdVoiture = voitureService.saveVoiture(newVoiture);
         return new ResponseEntity<>(createdVoiture, HttpStatus.CREATED);
     }
 
