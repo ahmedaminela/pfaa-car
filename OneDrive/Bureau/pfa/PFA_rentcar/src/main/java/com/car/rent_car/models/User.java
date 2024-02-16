@@ -11,12 +11,11 @@ import java.util.Set;
 
 
 
-@AllArgsConstructor
-@Getter
-@Setter
-@Data
+
 @Entity
 @Table(name = "users")
+@Getter
+@Setter
 public class User implements UserDetails {
 
     @Id
@@ -29,22 +28,26 @@ public class User implements UserDetails {
 
     @Column(nullable = false)
     private String password;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role_junction",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id")}
+            joinColumns = @JoinColumn(name = "user_id"), // Corrected to match the User ID column name
+            inverseJoinColumns = @JoinColumn(name = "role_id") // Corrected to match the Role ID column name
     )
-   private Set<Role> authorities;
+    private Set<Role> authorities;
 
     public User() {
         super();
-        this.authorities = new HashSet<Role>();
+        this.authorities = new HashSet<>();
     }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.authorities;
+    public User(long id, String username, String password, Set<Role> authorities) {
+        super();
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.authorities = authorities;
     }
 
     @Override
@@ -66,4 +69,6 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    // UserDetails interface methods
 }

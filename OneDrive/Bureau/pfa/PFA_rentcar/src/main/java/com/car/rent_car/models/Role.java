@@ -10,14 +10,17 @@ import org.springframework.security.core.GrantedAuthority;
 @AllArgsConstructor
 @Getter
 @Setter
-@Data
+// @Data // Consider the implications of using @Data with JPA entities
 public class Role implements GrantedAuthority {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="role_id")
     private Integer roleId;
 
-    private String Authority;
+    private String authority; // Renamed from 'Authority' to 'authority'
 
-
+    @Override
+    public String getAuthority() {
+        return this.authority;
+    }
 }
